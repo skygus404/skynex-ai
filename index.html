@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080f20">
+  <meta name="description" content="SkyNex AI - Your Intelligence, Beyond Limits.">
+  <title>SkyNex AI — Your Intelligence, Beyond Limits</title>
+  <style>
+    :root {
+      --bg: #080f20;
+      --panel: #101b32;
+      --panel-2: #14213b;
+      --line: rgba(148, 163, 184, .19);
+      --text: #f8fafc;
+      --muted: #9aa9c4;
+      --blue: #2684ff;
+      --cyan: #06c5e9;
+      --purple: #8855f6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 90% 5%, rgba(37, 99, 235, .19), transparent 32rem),
+        radial-gradient(ellipse at 0% 45%, rgba(6, 182, 212, .08), transparent 28rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .shell { width: min(100% - 32px, 960px); margin: auto; }
+    header {
+      height: 76px; display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: flex; align-items: center; gap: 11px; font-size: 21px; font-weight: 800; letter-spacing: -.7px; }
+    .brand-mark {
+      width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px;
+      color: white; font-size: 23px; font-weight: 900;
+      background: linear-gradient(140deg, var(--cyan), var(--blue) 55%, var(--purple));
+      box-shadow: 0 5px 24px rgba(38, 132, 255, .25);
+    }
+    .brand span:last-child { color: #56a9ff; }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .login, .menu {
+      color: var(--text); border: 1px solid var(--line); background: rgba(16, 27, 50, .7);
+      border-radius: 999px; padding: 9px 15px;
+    }
+    .menu { display: none; border-radius: 10px; font-size: 20px; }
+    main { padding: 66px 0 36px; text-align: center; }
+    .eyebrow {
+      display: inline-flex; gap: 8px; align-items: center; padding: 7px 12px;
+      border: 1px solid rgba(38, 132, 255, .28); border-radius: 999px;
+      color: #9ccaff; background: rgba(38, 132, 255, .08); font-size: 12px;
+    }
+    h1 { margin: 22px 0 12px; font-size: clamp(34px, 7vw, 58px); line-height: 1.08; letter-spacing: -2px; }
+    .gradient {
+      background: linear-gradient(90deg, #16c8eb, #398bff 52%, #a56cff);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .tagline { margin: 0; color: #c4d2e8; font-size: clamp(15px, 3vw, 19px); }
+    .intro { max-width: 590px; margin: 16px auto 30px; color: var(--muted); line-height: 1.7; font-size: 14px; }
+    .suggestions {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px; max-width: 690px; margin: 0 auto 22px;
+    }
+    .suggestion {
+      min-height: 66px; padding: 13px 15px; text-align: left; color: #e5efff;
+      border: 1px solid rgba(67, 125, 226, .38); border-radius: 15px;
+      background: linear-gradient(120deg, rgba(21, 44, 78, .8), rgba(34, 27, 70, .7));
+      transition: transform .18s, border-color .18s;
+    }
+    .suggestion:hover { transform: translateY(-2px); border-color: var(--cyan); }
+    .suggestion b { display: block; margin-bottom: 4px; font-size: 13px; }
+    .suggestion small { color: var(--muted); font-size: 11px; }
+    .chatbox {
+      display: flex; align-items: center; gap: 10px; max-width: 760px; margin: auto;
+      padding: 9px 10px 9px 17px; border: 1px solid rgba(111, 145, 199, .4);
+      border-radius: 19px; background: rgba(19, 31, 55, .94);
+      box-shadow: 0 12px 45px rgba(0, 0, 0, .2);
+    }
+    .spark { color: #62a9ff; font-size: 22px; }
+    .chatbox input {
+      min-width: 0; flex: 1; color: var(--text); border: 0; outline: 0;
+      background: transparent; padding: 12px 2px; font-size: 14px;
+    }
+    .chatbox input::placeholder { color: #8494b2; }
+    .send {
+      width: 44px; height: 44px; border: 0; border-radius: 14px; color: white;
+      background: linear-gradient(135deg, var(--blue), var(--purple)); font-size: 19px;
+    }
+    .note { margin: 12px 0 0; color: #72819d; font-size: 11px; }
+    #conversation { max-width: 760px; margin: 22px auto 0; text-align: left; }
+    .message { padding: 13px 15px; margin: 10px 0; border-radius: 14px; line-height: 1.6; font-size: 14px; }
+    .user-message { margin-left: 12%; background: #17345c; border: 1px solid #28548a; }
+    .demo-message { margin-right: 12%; background: var(--panel); border: 1px solid var(--line); color: #cbd5e1; }
+    nav {
+      display: flex; justify-content: center; gap: 8px; padding: 20px 0 26px;
+      border-top: 1px solid var(--line); margin-top: 42px;
+    }
+    nav a { color: var(--muted); text-decoration: none; padding: 9px 17px; border-radius: 10px; font-size: 13px; }
+    nav a.active, nav a:hover { color: #62b4ff; background: rgba(38, 132, 255, .09); }
+    footer { padding: 0 0 22px; text-align: center; color: #65738e; font-size: 11px; }
+    @media (max-width: 600px) {
+      .shell { width: min(100% - 24px, 960px); }
+      header { height: 66px; }
+      .brand { font-size: 18px; gap: 8px; }
+      .brand-mark { width: 34px; height: 34px; }
+      .login { padding: 8px 12px; font-size: 12px; }
+      .menu { display: inline-block; padding: 6px 10px; }
+      main { padding: 58px 0 25px; }
+      h1 { letter-spacing: -1.3px; }
+      .intro { font-size: 13px; margin-bottom: 24px; }
+      .suggestions { gap: 9px; }
+      .suggestion { min-height: 75px; padding: 11px; }
+      .suggestion b { font-size: 12px; }
+      .suggestion small { font-size: 10px; }
+      .chatbox { border-radius: 16px; padding-left: 12px; }
+      nav { justify-content: space-around; gap: 0; margin-top: 32px; }
+      nav a { padding: 9px 8px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand"><div class="brand-mark">S</div><div>SkyNex <span>AI</span></div></div>
+      <div class="header-actions">
+        <button class="login" type="button" onclick="alert('Fitur akun akan dibuat pada tahap berikutnya.')">Masuk</button>
+        <button class="menu" type="button" aria-label="Menu" onclick="document.getElementById('navigation').scrollIntoView({behavior:'smooth'})">☰</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="eyebrow">✦ AI ASSISTANT PLATFORM</div>
+      <h1>Selamat datang di<br><span class="gradient">SkyNex AI</span></h1>
+      <p class="tagline">Your Intelligence, Beyond Limits.</p>
+      <p class="intro">Tempat untuk bertanya, mencari inspirasi, dan menyelesaikan pekerjaan dengan bantuan teknologi AI.</p>
+
+      <section class="suggestions" aria-label="Contoh penggunaan">
+        <button class="suggestion" type="button" data-prompt="Bantu saya menulis artikel tentang teknologi AI.">
+          <b>✎ Menulis artikel</b><small>Mulai membuat tulisan</small>
+        </button>
+        <button class="suggestion" type="button" data-prompt="Berikan saya 10 ide konten kreatif untuk media sosial.">
+          <b>✧ Ide konten kreatif</b><small>Temukan inspirasi baru</small>
+        </button>
+        <button class="suggestion" type="button" data-prompt="Bantu saya menerjemahkan teks berikut: ">
+          <b>文 Terjemahkan teks</b><small>Bantuan penerjemahan</small>
+        </button>
+        <button class="suggestion" type="button" data-prompt="Bantu saya merangkum sebuah artikel panjang.">
+          <b>☷ Ringkas artikel</b><small>Ambil poin-poin penting</small>
+        </button>
+      </section>
+
+      <form class="chatbox" id="chatForm">
+        <span class="spark">✦</span>
+        <input id="messageInput" type="text" placeholder="Ketik pesan kamu di sini..." autocomplete="off" aria-label="Pesan untuk SkyNex AI">
+        <button class="send" type="submit" aria-label="Kirim pesan">➤</button>
+      </form>
+      <p class="note">Prototype tampilan — belum terhubung ke layanan AI.</p>
+      <section id="conversation" aria-live="polite"></section>
+    </main>
+
+    <nav id="navigation">
+      <a class="active" href="#home">⌂ Beranda</a>
+      <a href="#features">▦ Fitur</a>
+      <a href="#about">ⓘ Tentang</a>
+      <a href="mailto:hello@skynexai.example">✉ Kontak</a>
+    </nav>
+    <footer>© 2026 SkyNex AI. Dibuat untuk masa depan yang lebih cerdas.</footer>
+  </div>
+
+  <script>
+    const input = document.getElementById('messageInput');
+    const conversation = document.getElementById('conversation');
+
+    document.querySelectorAll('[data-prompt]').forEach(button => {
+      button.addEventListener('click', () => {
+        input.value = button.dataset.prompt;
+        input.focus();
+      });
+    });
+
+    document.getElementById('chatForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const message = input.value.trim();
+      if (!message) return;
+
+      const userBubble = document.createElement('div');
+      userBubble.className = 'message user-message';
+      userBubble.textContent = message;
+      conversation.appendChild(userBubble);
+
+      const demoBubble = document.createElement('div');
+      demoBubble.className = 'message demo-message';
+      demoBubble.textContent = 'Terima kasih! Tampilan chat SkyNex AI sudah bekerja. Ini masih prototype dan belum terhubung ke model AI. Integrasi AI akan kita tambahkan setelah tahap desain selesai.';
+      conversation.appendChild(demoBubble);
+
+      input.value = '';
+      conversation.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    });
+  </script>
+</body>
+</html>
